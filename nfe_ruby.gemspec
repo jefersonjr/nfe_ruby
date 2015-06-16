@@ -5,7 +5,7 @@ require 'nfe_ruby/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "nfe_ruby"
-  spec.version       = NfeRails::VERSION
+  spec.version       = NfeRuby::VERSION
   spec.authors       = ["Jeferson Junior"]
   spec.email         = ["jefersonjr@outlook.com.br"]
   spec.description   = "Geração, assinatura e envio de XML da NF-e"

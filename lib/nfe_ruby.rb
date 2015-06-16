@@ -1,4 +1,3 @@
-require 'nfe_rails/version'
 require 'entities/ide'
 require 'entities/emit'
 require 'entities/dest'
@@ -7,7 +6,6 @@ require 'entities/imposto'
 require 'entities/total'
 require 'entities/transp'
 require 'entities/inf_adic'
-require 'entities/util'
 require 'xmldsig'
 
 module NfeRuby
