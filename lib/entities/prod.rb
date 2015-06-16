@@ -1,26 +1,7 @@
 module NfeRuby
   class Prod
-    attr_accessor :n_item
-    attr_accessor :c_prod
-    attr_accessor :c_ean
-    attr_accessor :x_prod
-    attr_accessor :ncm
-    attr_accessor :ex_tipi
-    attr_accessor :cfop
-    attr_accessor :u_com
-    attr_accessor :q_com
-    attr_accessor :v_un_com
-    attr_accessor :v_prod
-    attr_accessor :c_ean_trib
-    attr_accessor :u_trib
-    attr_accessor :q_trib
-    attr_accessor :v_un_trib
-    attr_accessor :v_outro
-    attr_accessor :v_frete
-    attr_accessor :v_seg
-    attr_accessor :v_desc
-    attr_accessor :ind_tot
-    attr_accessor :x_ped
-    attr_accessor :n_item_ped
+    attr_accessor :n_item, :c_prod, :c_ean, :x_prod, :ncm, :ex_tipo, :cfop, :u_com, :q_com, :v_un_com
+    attr_accessor :v_prod, :c_ean_trib, :u_trib, :q_trib, :v_un_trib, :v_outro, :v_frete, :v_seg, :v_desc
+    attr_accessor :ind_tot, :x_ped, :n_item_ped
   end
 end

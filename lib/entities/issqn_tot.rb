@@ -1,9 +1,5 @@
 module NfeRuby
   class IssqnTot
-    attr_accessor :v_serv
-    attr_accessor :v_bc
-    attr_accessor :v_iss
-    attr_accessor :v_pis
-    attr_accessor :v_cofins
+    attr_accessor :v_serv, :v_bc, :v_iss, :v_pis, :v_cofins
   end
 end

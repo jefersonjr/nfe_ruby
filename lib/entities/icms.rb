@@ -1,17 +1,6 @@
 module NfeRuby
   class Icms
-    attr_accessor :cst
-    attr_accessor :orig
-    attr_accessor :mod_bc
-    attr_accessor :v_bc
-    attr_accessor :p_icms
-    attr_accessor :v_icms
-    attr_accessor :mod_bc_st
-    attr_accessor :p_mva_st
-    attr_accessor :p_red_bc_st
-    attr_accessor :v_bc_st
-    attr_accessor :p_icms_st
-    attr_accessor :v_icms_st
-    attr_accessor :p_red_bc
+    attr_accessor :cst, :orig, :mod_bc, :v_bc, :p_icms, :v_icms, :mod_bc_st, :p_mva_st, :p_red_bc_st
+    attr_accessor :v_bc_st, :p_icms_st, :v_icms_st, :p_red_bc
   end
 end

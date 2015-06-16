@@ -1,9 +1,5 @@
 module NfeRuby
   class PisSt
-    attr_accessor :v_bc
-    attr_accessor :p_pis
-    attr_accessor :q_bc_prod
-    attr_accessor :v_aliq_prod
-    attr_accessor :v_pis
+    attr_accessor :v_bc, :p_pis, :q_bc_prod, :v_aliq_prod, :v_pis
   end
 end

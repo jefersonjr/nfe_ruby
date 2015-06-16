@@ -1,6 +1,5 @@
 module NfeRuby
   class InfAdic
-    attr_accessor :inf_cpl
-    attr_accessor :inf_ad_fisco
+    attr_accessor :inf_cpl, :inf_ad_fisco
   end
 end

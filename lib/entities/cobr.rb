@@ -3,8 +3,7 @@ require 'fat'
 
 module NfeRuby
   class Cobr
-    attr_accessor :fat
-    attr_accessor :dup
+    attr_accessor :fat, :dup
     
     def initialize
       self.fat = NfeRuby::Fat.new

@@ -3,8 +3,7 @@ require 'entities/issqn_tot'
 
 module NfeRuby
   class Total
-    attr_accessor :icms
-    attr_accessor :issqn
+    attr_accessor :icms, :issqn
     
     def initialize
       self.icms = NfeRuby::IcmsTot.new
