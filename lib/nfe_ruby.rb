@@ -37,10 +37,10 @@ module NfeRuby
       self.transp = NfeRuby::Transp.new
       self.inf_adic = NfeRuby::InfAdic.new
 
-      self.uf_wsdl = @options[:uf_wsdl]
-      self.cert_file = @options[:cert_key_file]
-      self.priv_key_file = @options[:priv_key_file]
-      self.priv_key_pass = @options[:priv_key_pass]
+      self.uf_wsdl = options[:uf_wsdl]
+      self.cert_file = options[:cert_key_file]
+      self.priv_key_file = options[:priv_key_file]
+      self.priv_key_pass = options[:priv_key_pass]
     end
   end
 end
