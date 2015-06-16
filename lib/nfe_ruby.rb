@@ -29,13 +29,13 @@ module NfeRuby
     attr_accessor :uf_wsdl
 
     def initialize(options = {})
-      self.ide = NfeRails::Ide.new
-      self.emit = NfeRails::Emit.new
-      self.dest = NfeRails::Dest.new
-      self.imposto = NfeRails::Imposto.new
-      self.total = NfeRails::Total.new
-      self.transp = NfeRails::Transp.new
-      self.inf_adic = NfeRails::InfAdic.new
+      self.ide = NfeRuby::Ide.new
+      self.emit = NfeRuby::Emit.new
+      self.dest = NfeRuby::Dest.new
+      self.imposto = NfeRuby::Imposto.new
+      self.total = NfeRuby::Total.new
+      self.transp = NfeRuby::Transp.new
+      self.inf_adic = NfeRuby::InfAdic.new
 
       self.uf_wsdl = @options[:uf_wsdl]
       self.cert_file = @options[:cert_key_file]
