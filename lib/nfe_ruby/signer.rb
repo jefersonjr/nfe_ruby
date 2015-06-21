@@ -7,7 +7,7 @@ module NfeRuby
       @digest = OpenSSL::Digest::SHA1.new
     end
 
-    # Assimar um documento XML
+    # Assinar um documento XML
     def assinar(xml, tag)
       @xml = Nokogiri::XML(xml, &:noblanks)
       node = @xml.at(tag)
