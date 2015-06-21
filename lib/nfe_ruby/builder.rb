@@ -44,6 +44,7 @@ module NfeRuby
                 xml.xCpl @nfe_doc.emit.ender_emit.x_cpl
                 xml.xBairro @nfe_doc.emit.ender_emit.x_bairro
                 xml.cMun @nfe_doc.emit.ender_emit.c_mun
+                xml.xMun @nfe_doc.emit.ender_emit.x_mun
                 xml.UF @nfe_doc.emit.ender_emit.uf
                 xml.CEP @nfe_doc.emit.ender_emit.cep
                 xml.cPais @nfe_doc.emit.ender_emit.c_pais
@@ -64,8 +65,8 @@ module NfeRuby
                 xml.xBairro @nfe_doc.dest.ender_dest.x_bairro
                 xml.cMun @nfe_doc.dest.ender_dest.c_mun
                 xml.xMun @nfe_doc.dest.ender_dest.x_mun
-                xml.uf @nfe_doc.dest.ender_dest.uf
-                xml.cep @nfe_doc.dest.ender_dest.cep
+                xml.UF @nfe_doc.dest.ender_dest.uf
+                xml.CEP @nfe_doc.dest.ender_dest.cep
                 xml.cPais @nfe_doc.dest.ender_dest.c_pais
                 xml.xPais @nfe_doc.dest.ender_dest.x_pais
                 xml.fone @nfe_doc.dest.ender_dest.fone
@@ -94,22 +95,52 @@ module NfeRuby
                   xml.indTot item.prod.ind_tot
                 }
                 xml.imposto {
-                  tag_imposto = @nfe_doc.emit.crt.between?(1, 2) ? "ICMSSN#{item.imposto.icms.cst}" : "ICMS#{item.imposto.icms.cst}"
-                  xml.send(tag_imposto) {
-                    xml.cst item.imposto.icms.cst
-                    xml.orig item.imposto.icms.orig
-                    xml.modBC item.imposto.icms.mod_bc if item.imposto.icms.mod_bc.present?
-                    xml.vBC item.imposto.icms.v_bc if item.imposto.icms.v_bc.present?
-                    xml.pICMS item.imposto.icms.p_icms if item.imposto.icms.p_icms.present?
-                    xml.vICMS item.imposto.icms.v_icms if item.imposto.icms.v_icms
-                    xml.modBCST item.imposto.icms.mod_bc_st if item.imposto.icms.mod_bc_st.present?
-                    xml.pMVAST item.imposto.icms.p_mva_st if item.imposto.icms.p_mva_st.present?
-                    xml.pRedBCST item.imposto.icms.p_red_bc_st if item.imposto.icms.p_red_bc_st.present?
-                    xml.vBCST item.imposto.icms.v_bc_st if item.imposto.icms.v_bc_st.present?
-                    xml.pICMSST item.imposto.icms.p_icms_st if item.imposto.icms.p_icms_st.present?
-                    xml.vICMSST item.imposto.icms.v_icms_st if item.imposto.icms.v_icms_st.present?
-                    xml.pRedBC item.imposto.icms.p_red_bc if item.imposto.icms.p_red_bc.present?
+                  xml.ICMS {
+                    tag_icms = @nfe_doc.emit.crt.between?(1, 2) ? "ICMSSN#{item.imposto.icms.cst}" : "ICMS#{item.imposto.icms.cst}"
+                    xml.send(tag_icms) {
+                      xml.orig item.imposto.icms.orig
+                      xml.CST item.imposto.icms.cst
+                      xml.vICMSDeson item.imposto.icms.v_icms_deson if item.imposto.icms.v_icms_deson.present?
+                      xml.motDesICMS item.imposto.icms.mot_des_icms if item.imposto.icms.mot_des_icms.present?
+                      xml.modBC item.imposto.icms.mod_bc if item.imposto.icms.mod_bc.present?
+                      xml.vBC item.imposto.icms.v_bc if item.imposto.icms.v_bc.present?
+                      xml.pICMS item.imposto.icms.p_icms if item.imposto.icms.p_icms.present?
+                      xml.vICMS item.imposto.icms.v_icms if item.imposto.icms.v_icms
+                      xml.modBCST item.imposto.icms.mod_bc_st if item.imposto.icms.mod_bc_st.present?
+                      xml.pMVAST item.imposto.icms.p_mva_st if item.imposto.icms.p_mva_st.present?
+                      xml.pRedBCST item.imposto.icms.p_red_bc_st if item.imposto.icms.p_red_bc_st.present?
+                      xml.vBCST item.imposto.icms.v_bc_st if item.imposto.icms.v_bc_st.present?
+                      xml.pICMSST item.imposto.icms.p_icms_st if item.imposto.icms.p_icms_st.present?
+                      xml.vICMSST item.imposto.icms.v_icms_st if item.imposto.icms.v_icms_st.present?
+                      xml.pRedBC item.imposto.icms.p_red_bc if item.imposto.icms.p_red_bc.present?
+                    }
                   }
+                  if item.imposto.pis.cst.present?
+                  xml.PIS {
+                    tag_pis = case item.imposto.pis.cst
+                                when '01'..'02' then 'PISAliq'
+                                when '03' then 'PISQtde'
+                                when '04'..'09' then 'PISNT'
+                                when '99' then 'PISOutr'
+                              end
+                    xml.send(tag_pis) {
+                      xml.CST item.imposto.pis.cst if item.imposto.pis.cst.present?
+                    }
+                  }
+                  end
+                  if item.imposto.cofins.cst.present?
+                    xml.COFINS {
+                      tag_cofins = case item.imposto.cofins.cst
+                                     when '01'..'02' then 'COFINSAliq'
+                                     when '03' then 'COFINSQtde'
+                                     when '04'..'09' then 'COFINSNT'
+                                     when '99' then 'COFINSOutr'
+                                   end
+                      xml.send(tag_cofins) {
+                        xml.CST item.imposto.cofins.cst if item.imposto.cofins.cst.present?
+                      }
+                    }
+                  end
                 }
               }
             end
@@ -131,6 +162,9 @@ module NfeRuby
                 xml.vOutro @nfe_doc.total.icms.v_outro
                 xml.vNF @nfe_doc.total.icms.v_nf
               }
+            }
+            xml.transp {
+              xml.modFrete @nfe_doc.transp.mod_frete
             }
           }
         }

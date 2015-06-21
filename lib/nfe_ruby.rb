@@ -2,6 +2,9 @@ require 'entities/ide'
 require 'entities/emit'
 require 'entities/dest'
 require 'entities/icms'
+require 'entities/ipi'
+require 'entities/pis'
+require 'entities/cofins'
 require 'entities/det'
 require 'entities/imposto'
 require 'entities/total'
@@ -9,6 +12,7 @@ require 'entities/transp'
 require 'entities/inf_adic'
 require 'nfe_ruby/builder'
 require 'nfe_ruby/util'
+require 'nfe_ruby/signer'
 require 'xmldsig'
 
 module NfeRuby
@@ -21,6 +25,8 @@ module NfeRuby
   class Nfe
     # Detalhes/Itens da NF-e
     @lista_detalhes = []
+    @signer = nil
+    @builder = nil
 
     @wsdl = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx"
 
@@ -76,17 +82,24 @@ module NfeRuby
       self.cert_file = options[:cert_key_file]
       self.priv_key_file = options[:priv_key_file]
       self.priv_key_pass = options[:priv_key_pass]
+
+      @signer = NfeRuby::Signer.new(:cert_file => options[:cert_key_file],
+                                    :priv_key_file => options[:priv_key_file],
+                                    :priv_key_pass => options[:priv_key_pass])
+      @builder = NfeRuby::Builder.new(self)
     end
 
     def to_builder
       gerar_chave_acesso
-      xml_builder = NfeRuby::Builder.new(self)
-      xml_builder.to_builder
+      @builder.to_builder
     end
 
     def to_xml
       to_builder.to_xml
     end
 
+    def assinar
+      @signer.assinar(self.to_xml.to_s, 'infNFe')
+    end
   end
 end
