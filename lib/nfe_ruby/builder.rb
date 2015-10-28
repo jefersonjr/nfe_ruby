@@ -112,6 +112,7 @@ module NfeRuby
                       xml.vBCST item.imposto.icms.v_bc_st if item.imposto.icms.v_bc_st.present?
                       xml.pICMSST item.imposto.icms.p_icms_st if item.imposto.icms.p_icms_st.present?
                       xml.vICMSST item.imposto.icms.v_icms_st if item.imposto.icms.v_icms_st.present?
+                      xml.pRedBC item.imposto.icms.p_red_bc if item.imposto.icms.p_red_bc.present?
                       xml.pDif item.imposto.icms.p_dif if item.imposto.icms.p_dif.present?
                       xml.vICMSDif item.imposto.icms.v_icms_dif if item.imposto.icms.v_icms_dif.present?
 
